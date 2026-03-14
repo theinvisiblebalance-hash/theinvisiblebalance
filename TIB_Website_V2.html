@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Invisible Balance — Build Dunya. But with Deen.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600;1,700&family=Space+Mono:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{--black:#060608;--gold:#c9a84c;--gold2:#d4af37;--gold-l:#e8c97a;--gold-d:#8a6e2a;--white:#f4efe4;--muted:rgba(244,239,228,.45);--grey:#0f0f14;--grey2:#191920;--grey3:#242430;--border:rgba(201,168,76,.12)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Crimson Pro',serif;font-size:18px;line-height:1.8;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold-d)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.2;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E")}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,8,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:8px}.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:28px}.nav-links a{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:var(--gold)}.nav-cta{color:var(--black)!important;background:var(--gold);padding:8px 18px}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer}.nav-toggle span{display:block;width:22px;height:1px;background:var(--white)}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}.mobile-menu.open{display:flex}.mobile-menu a{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:4px;color:var(--muted);text-decoration:none;text-transform:uppercase}
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% -5%,#1c1508,var(--black) 60%)}
+.hero-geo{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.06}
+.hero-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(201,168,76,.08),transparent 70%);pointer-events:none}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp .8s .2s forwards;display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}.hero-eyebrow::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.hero-arabic{font-size:clamp(24px,4vw,44px);color:var(--gold-l);opacity:0;animation:fadeUp .8s .3s forwards;direction:rtl;font-family:'Cormorant Garamond',serif;font-weight:300;margin-bottom:16px;line-height:2}
+#home h1{font-family:'Cormorant Garamond',serif;font-size:clamp(50px,11vw,130px);font-weight:300;line-height:.9;letter-spacing:-2px;opacity:0;animation:fadeUp .8s .4s forwards}
+#home h1 em{font-style:italic;color:var(--gold);display:block}#home h1 strong{font-weight:700;display:block}
+.hero-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:28px auto;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2.5vw,22px);color:var(--muted);max-width:580px;font-style:italic;line-height:2;opacity:0;animation:fadeUp .8s .8s forwards}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:40px;opacity:0;animation:fadeUp .8s 1s forwards}
+.btn-gold{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;transition:all .2s;display:inline-block}.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px)}
+.btn-outline{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.3);padding:16px 32px;text-decoration:none;transition:all .2s;display:inline-block}.btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,.05);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s 1.4s forwards}
+.hero-scroll span{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.3);text-transform:uppercase}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(201,168,76,.3),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:.8}}@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+section{padding:100px 0}.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+.sec-eye{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}.sec-eye::after{content:'';flex:1;max-width:60px;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.4),transparent)}
+.sec-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,68px);font-weight:600;line-height:1;margin-bottom:12px}.sec-h2 em{color:var(--gold);font-style:italic}
+.sec-sub{color:var(--muted);font-size:16px;max-width:520px;margin-bottom:56px;font-style:italic;line-height:1.9}
+.divider{border:none;border-top:1px solid var(--border);margin:0}
+#about{background:var(--grey)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-frame{width:100%;aspect-ratio:4/5;background:var(--grey2);border:1px solid var(--border);position:relative;overflow:hidden}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(20%) brightness(.85)}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.85),transparent 50%)}
+.about-img-quote{position:absolute;bottom:24px;left:24px;right:24px}
+.about-img-quote p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--white);line-height:1.6}
+.about-img-quote span{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;display:block;margin-top:8px}
+.about-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,36px);font-weight:300;font-style:italic;line-height:1.4;color:var(--white);margin-bottom:24px}
+.about-quote strong{font-weight:700;color:var(--gold);font-style:normal;display:block}
+.about-text{color:var(--muted);line-height:2;font-size:17px;margin-bottom:18px}
+.about-story-cards{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:28px}
+.story-card{background:var(--grey2);padding:22px;border-top:2px solid var(--border);transition:border-color .2s}.story-card:hover{border-top-color:var(--gold)}
+.story-card h4{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--gold);font-weight:600;margin-bottom:6px}
+.story-card p{font-size:14px;color:var(--muted);line-height:1.7}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:24px}
+.stat-item{background:var(--grey2);padding:18px;text-align:center}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+.stat-l{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.islamic-banner{background:var(--grey2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 40px;text-align:center;position:relative;overflow:hidden}
+.islamic-banner::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='.3' opacity='.12'%3E%3Cpolygon points='30,2 56,17 56,43 30,58 4,43 4,17'/%3E%3Cpolygon points='30,12 46,21 46,39 30,48 14,39 14,21'/%3E%3C/g%3E%3C/svg%3E") repeat}
+.ib-inner{position:relative;z-index:1}
+.ib-arabic{font-size:clamp(24px,5vw,52px);color:var(--gold-l);direction:rtl;font-family:'Cormorant Garamond',serif;font-weight:300;margin-bottom:12px;line-height:2}
+.ib-trans{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,2vw,20px);font-style:italic;color:var(--muted);margin-bottom:8px}
+.ib-ref{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.4);text-transform:uppercase}
+#prayer-times{background:var(--black)}
+.prayer-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px;margin-bottom:40px}
+.city-selector{display:flex;align-items:center;gap:12px}
+.city-selector label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.city-select{background:var(--grey2);border:1px solid var(--border);color:var(--white);font-family:'Space Mono',monospace;font-size:11px;padding:8px 32px 8px 16px;outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.prayer-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+.prayer-card{background:var(--grey2);padding:26px 14px;text-align:center;border-top:2px solid transparent;transition:all .3s;position:relative}
+.prayer-card.active{background:rgba(201,168,76,.08);border-top-color:var(--gold)}.prayer-card.next{background:rgba(201,168,76,.04);border-top-color:rgba(201,168,76,.4)}
+.prayer-name{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.prayer-arabic{font-size:20px;color:var(--gold);margin-bottom:8px;line-height:1.4}
+.prayer-time{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);line-height:1}
+.prayer-card.active .prayer-time{color:var(--gold)}
+.prayer-badge{position:absolute;top:8px;right:8px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 8px;text-transform:uppercase}
+.badge-now{background:var(--gold);color:var(--black)}.badge-next{background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.2)}
+.prayer-countdown{text-align:center;margin-top:28px;padding:28px;background:var(--grey2);border:1px solid var(--border);position:relative;overflow:hidden}
+.prayer-countdown::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='none' stroke='%23c9a84c' stroke-width='.3' opacity='.08'/%3E%3C/svg%3E") repeat}
+.countdown-inner{position:relative;z-index:1}
+.countdown-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+.countdown-time{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,56px);font-weight:700;color:var(--gold);letter-spacing:4px}
+.countdown-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:2px;text-transform:uppercase}
+#tracker{background:var(--grey)}
+.tracker-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:16px}
+.day-col{background:var(--grey2);overflow:hidden}.day-header{padding:12px 6px;text-align:center;background:var(--grey3);border-bottom:1px solid var(--border)}
+.day-name{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:2px}
+.day-date{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--white);font-weight:700}.day-today .day-date{color:var(--gold)}
+.prayer-checks{padding:6px}.prayer-check{display:flex;align-items:center;justify-content:space-between;padding:6px;margin-bottom:2px;cursor:pointer;border:1px solid transparent;transition:all .2s}
+.prayer-check:hover{border-color:var(--border);background:rgba(201,168,76,.03)}.prayer-check.done{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.2)}
+.check-label{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.check-box{width:14px;height:14px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.prayer-check.done .check-box{background:var(--gold);border-color:var(--gold)}.check-box svg{display:none;width:8px;height:8px}.prayer-check.done .check-box svg{display:block}
+.tracker-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ts-card{background:var(--grey2);padding:22px;text-align:center}
+.ts-n{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:var(--gold);line-height:1}
+.ts-l{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:6px}
+.tracker-streak{background:rgba(201,168,76,.06);border:1px solid var(--border);padding:20px 28px;margin-top:3px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.streak-text{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}.streak-n{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);font-weight:700}
+#articles{background:var(--black)}
+.articles-featured{display:grid;grid-template-columns:1.4fr 1fr;gap:3px;margin-bottom:3px}
+.article-card{background:var(--grey2);padding:36px;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:background .3s,transform .2s;border-top:2px solid transparent;cursor:pointer}
+.article-card:hover{background:var(--grey3);border-top-color:var(--gold);transform:translateY(-3px)}
+.article-card-img{width:100%;height:180px;object-fit:cover;margin-bottom:18px;filter:grayscale(20%) brightness(.8);display:block}
+.article-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;display:inline-block;padding:4px 12px;border:1px solid rgba(201,168,76,.2);background:rgba(201,168,76,.05)}
+.article-card h3{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.5vw,28px);font-weight:700;line-height:1.2;margin-bottom:10px;color:var(--white)}
+.article-card p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:16px}
+.article-meta{display:flex;align-items:center;gap:10px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(244,239,228,.25);text-transform:uppercase;flex-wrap:wrap}
+.read-more{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;margin-top:14px;transition:gap .2s}.read-more::after{content:'→'}.article-card:hover .read-more{gap:14px}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+#testimonials{background:var(--grey)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.testi-card{background:var(--grey2);padding:32px;position:relative;overflow:hidden;border-bottom:2px solid transparent;transition:border-color .2s}.testi-card:hover{border-bottom-color:var(--gold)}
+.testi-card::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:90px;color:rgba(201,168,76,.05);position:absolute;top:-8px;left:8px;line-height:1;font-weight:700}
+.testi-stars{color:var(--gold);font-size:13px;margin-bottom:12px;letter-spacing:3px}
+.testi-text{font-size:15px;color:rgba(244,239,228,.8);line-height:1.9;font-style:italic;margin-bottom:18px;position:relative;z-index:1}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;background:var(--grey3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);flex-shrink:0}
+.testi-name{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
+.testi-handle{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px}
+#products{background:var(--black)}
+.payment-box{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.2);padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.payment-box .pay-icon{font-size:28px;flex-shrink:0}
+.payment-box .pay-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.payment-box .pay-info{font-size:15px;color:var(--white);line-height:1.9}.payment-box .pay-info strong{color:var(--gold-l)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.product-card{background:var(--grey2);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .2s;position:relative}
+.product-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-4px)}.product-card.featured{border-color:rgba(201,168,76,.3)}
+.product-preview{width:100%;aspect-ratio:16/9;background:var(--black);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);padding:24px}
+.product-preview-journal{background:linear-gradient(135deg,#080808,#1a1408);flex-direction:column;gap:12px}
+.pdf-cover{width:72px;height:88px;background:linear-gradient(135deg,#1a1408,#0f0f00);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:4px 4px 20px rgba(201,168,76,.2);position:relative}
+.pdf-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--gold)}
+.pdf-cover-text{font-family:'Cormorant Garamond',serif;font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1px;text-align:center;padding:4px;line-height:1.4}
+.pdf-pages{display:flex;gap:4px}
+.pdf-page{width:22px;height:28px;background:var(--grey2);border:1px solid rgba(201,168,76,.2)}
+.product-preview-ai{background:linear-gradient(135deg,#050510,#0a0a20);flex-direction:column;gap:10px}
+.ai-orb{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.25),transparent 70%);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:22px;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.2)}50%{box-shadow:0 0 0 10px rgba(201,168,76,.0)}}
+.ai-lines{display:flex;flex-direction:column;gap:4px;width:72px}.ai-line{height:3px;background:rgba(201,168,76,.2);border-radius:2px}.ai-line:nth-child(2){width:70%}.ai-line:nth-child(3){width:85%}
+.product-badge{position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase;z-index:1}
+.badge-bestseller{background:var(--gold);color:var(--black)}.badge-free{background:rgba(80,160,80,.2);color:#90d890;border:1px solid rgba(80,160,80,.3)}.badge-new{background:rgba(100,100,200,.2);color:#aaaaff;border:1px solid rgba(100,100,200,.3)}
+.product-body{padding:28px;flex:1;display:flex;flex-direction:column}
+.product-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;line-height:1.2}
+.product-desc{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:16px;flex:1}
+.product-includes{margin-bottom:16px}.product-includes h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+.product-includes ul{list-style:none;padding:0}.product-includes ul li{font-size:13px;color:rgba(244,239,228,.6);padding:4px 0 4px 14px;position:relative;border-bottom:1px solid rgba(201,168,76,.05)}.product-includes ul li::before{content:'◆';font-size:6px;position:absolute;left:0;top:9px;color:var(--gold)}
+.product-price{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}
+.price-main{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold)}.price-curr{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted)}.price-free{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:#90d890}
+.btn-product{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:13px 20px;text-align:center;display:block;text-decoration:none;transition:all .2s;cursor:pointer;border:none;width:100%}
+.btn-buy{background:var(--gold);color:var(--black)}.btn-buy:hover{background:var(--gold-l)}.btn-get{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.3)}.btn-get:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
+.article-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(6,6,8,.97);overflow-y:auto;padding:80px 24px}.article-modal.open{display:block}
+.article-modal-inner{max-width:720px;margin:0 auto}
+.modal-back{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:8px;margin-bottom:44px;background:none;border:none;padding:0}.modal-back::before{content:'←'}.modal-back:hover{color:var(--gold-l)}
+.modal-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,50px);font-weight:700;line-height:1.05;margin-bottom:16px}
+.modal-meta{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.modal-body{font-size:18px;line-height:2;color:rgba(244,239,228,.85)}.modal-body h2{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);font-weight:600;margin:40px 0 12px;line-height:1.2}.modal-body p{margin-bottom:20px}.modal-body blockquote{border-left:3px solid var(--gold);padding:16px 24px;margin:24px 0;background:rgba(201,168,76,.04);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--white)}.modal-body .arabic{font-size:24px;color:var(--gold-l);text-align:right;margin:20px 0 6px;direction:rtl;line-height:2}.modal-body .translation{font-style:italic;color:var(--muted);margin-bottom:24px;font-size:14px}.modal-body strong{color:var(--gold-l)}.modal-body ul{margin:12px 0 20px 22px}.modal-body ul li{margin-bottom:8px;color:rgba(244,239,228,.75);font-size:17px}
+.quote-sec{background:var(--grey2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+.quote-sec::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23c9a84c' stroke-width='.3' opacity='.07'%3E%3Cpolygon points='30,2 56,17 56,43 30,58 4,43 4,17'/%3E%3C/g%3E%3C/svg%3E") repeat}
+.quote-sec blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,40px);font-style:italic;font-weight:300;max-width:800px;margin:0 auto 14px;line-height:1.5;color:var(--white);position:relative;z-index:1}.quote-sec blockquote strong{font-style:normal;font-weight:700;color:var(--gold)}
+.quote-sec cite{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;position:relative;z-index:1}
+footer{background:var(--grey);border-top:1px solid var(--border);padding:60px 40px 32px}
+.footer-inner{max-width:1100px;margin:0 auto}.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:15px;color:var(--muted);margin-top:12px;line-height:1.8;max-width:260px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--white);display:flex;align-items:center;gap:8px}.footer-logo span{color:var(--gold)}
+.footer-col h4{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:18px}.footer-col a{display:block;font-size:15px;color:var(--muted);text-decoration:none;margin-bottom:10px;transition:color .2s}.footer-col a:hover{color:var(--white)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-bottom p{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(244,239,228,.2);text-transform:uppercase}
+#toast{display:none;position:fixed;bottom:30px;right:30px;background:var(--gold);color:var(--black);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;padding:14px 24px;z-index:3000}
+@media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:48px}.articles-featured{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr}.testi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.nav-toggle{display:flex}.wrap{padding:0 20px}section{padding:70px 0}.prayer-grid{grid-template-columns:repeat(3,1fr)}.articles-grid{grid-template-columns:1fr}.products-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}.tracker-stats{grid-template-columns:repeat(2,1fr)}.about-story-cards{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.prayer-grid{grid-template-columns:repeat(2,1fr)}.hero-actions{flex-direction:column;align-items:center}}
+
+.article-card-img{width:100%;height:160px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.art-inner{text-align:center;position:relative;z-index:1}
+.art-arabic{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold-l);direction:rtl;line-height:1.6;margin-bottom:6px;text-shadow:0 0 30px rgba(201,168,76,.3)}
+.art-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:rgba(201,168,76,.4);text-transform:uppercase}
+.art-discipline{background:radial-gradient(ellipse at center,#1a0f00,#080808);border-bottom:1px solid var(--border)}
+.art-discipline::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpolygon points='25,2 47,14 47,36 25,48 3,36 3,14' fill='none' stroke='%23c9a84c' stroke-width='.4' opacity='.15'/%3E%3C/svg%3E") repeat}
+.art-wealth{background:radial-gradient(ellipse at center,#0a1200,#080808);border-bottom:1px solid var(--border)}
+.art-wealth::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='none' stroke='%2390d890' stroke-width='.4' opacity='.12'/%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='%2390d890' stroke-width='.4' opacity='.12'/%3E%3C/svg%3E") repeat}
+.art-wealth .art-arabic{color:#90d890;text-shadow:0 0 30px rgba(144,216,144,.2)}
+.art-balance{background:radial-gradient(ellipse at center,#100a1a,#080808);border-bottom:1px solid var(--border)}
+.art-balance::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cline x1='30' y1='0' x2='30' y2='60' stroke='%23c9a84c' stroke-width='.3' opacity='.1'/%3E%3Cline x1='0' y1='30' x2='60' y2='30' stroke='%23c9a84c' stroke-width='.3' opacity='.1'/%3E%3Ccircle cx='30' cy='30' r='25' fill='none' stroke='%23c9a84c' stroke-width='.4' opacity='.1'/%3E%3C/svg%3E") repeat}
+.art-fajr{background:radial-gradient(ellipse at 50% 100%,#1a0800,#080808);border-bottom:1px solid var(--border)}
+.art-fajr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 120%,rgba(201,100,30,.08),transparent 60%)}
+.art-fajr .art-arabic{color:#e8a050;text-shadow:0 0 30px rgba(232,160,80,.2)}
+.art-nafs{background:radial-gradient(ellipse at center,#001520,#080808);border-bottom:1px solid var(--border)}
+.art-nafs::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 5 Q45 25 25 45 Q5 25 25 5Z' fill='none' stroke='%23aaaaff' stroke-width='.4' opacity='.1'/%3E%3C/svg%3E") repeat}
+.art-nafs .art-arabic{color:#aaaaff;text-shadow:0 0 30px rgba(170,170,255,.2)}
+.about-art-frame{position:relative}
+.about-art{width:100%;height:100%;position:absolute;inset:0}
+
+</style>
+</head>
+<body>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">Home</a><a href="#about" onclick="closeMobile()">About</a><a href="#prayer-times" onclick="closeMobile()">Salah</a><a href="#tracker" onclick="closeMobile()">Tracker</a><a href="#articles" onclick="closeMobile()">Articles</a><a href="#testimonials" onclick="closeMobile()">Community</a><a href="#products" onclick="closeMobile()">Products</a>
+</div>
+<nav>
+  <a href="#home" class="nav-logo">⚖️ <span>TIB</span></a>
+  <div class="nav-links"><a href="#about">About</a><a href="#prayer-times">Salah</a><a href="#tracker">Tracker</a><a href="#articles">Articles</a><a href="#testimonials">Community</a><a href="#products">Products</a><a href="https://beacons.ai/theinvisiblebalance" target="_blank" class="nav-cta">TIB Sensei AI</a></div>
+  <div class="nav-toggle" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-geo">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="g" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse"><polygon points="40,2 78,22 78,58 40,78 2,58 2,22" fill="none" stroke="#c9a84c" stroke-width="0.5"/><polygon points="40,18 62,30 62,50 40,62 18,50 18,30" fill="none" stroke="#c9a84c" stroke-width="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>
+  </div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">Build Dunya · But with Deen</div>
+  <div class="hero-arabic">وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ</div>
+  <h1>The<em>Invisible</em><strong>Balance</strong></h1>
+  <div class="hero-line"></div>
+  <p class="hero-desc">No sugarcoating. No excuses. Just the truth about building both worlds — the Islamic way.</p>
+  <div class="hero-actions"><a href="#articles" class="btn-gold">Read Articles</a><a href="#tracker" class="btn-outline">Track Your Salah</a></div>
+  <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+</section>
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="sec-eye">My Story</div>
+        <p class="about-quote">"Main 25 saal ka tha jab pata chala — <strong>Deen aur Dunya dono deserve karne hain."</strong></p>
+        <p class="about-text">Saalon tak mujhe lagta tha ke ek choose karna hai — ya religion, ya success. Ye soch mujhe rok rahi thi. Phir ek raat Quran ki ek ayat ne sab badal diya.</p>
+        <p class="about-text"><strong style="color:var(--gold-l)">"Dunya ka hissa mat bhool."</strong> — Surah Al-Qasas: 77</p>
+        <p class="about-text">Allah ne khud dono ka hukm diya. Us raat The Invisible Balance shuru hua — ek concept nahi, ek commitment.</p>
+        <div class="about-story-cards">
+          <div class="story-card"><h4>⚖️ The Balance</h4><p>Deen pe strong. Dunya mein active. Dono ek saath — obligation hai.</p></div>
+          <div class="story-card"><h4>🔥 No Softness</h4><p>Hard truths. Real steps. Zero excuses. Real growth real talk se hoti hai.</p></div>
+          <div class="story-card"><h4>📖 Islamic Roots</h4><p>Har advice Quran aur Sunnah pe based. No opinion — sirf haqeeqat.</p></div>
+          <div class="story-card"><h4>🤖 TIB Sensei AI</h4><p>24/7 Islamic guidance — discipline, business, deen — sab ek jagah.</p></div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item"><div class="stat-n">25</div><div class="stat-l">Age · Building</div></div>
+          <div class="stat-item"><div class="stat-n">5</div><div class="stat-l">Pillars</div></div>
+          <div class="stat-item"><div class="stat-n">∞</div><div class="stat-l">Discipline</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="about-img-frame about-art-frame">
+          <div class="about-art">
+            <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <rect width="300" height="400" fill="#080808"/>
+              <g stroke="#c9a84c" fill="none" opacity="0.15">
+                <polygon points="150,10 280,85 280,235 150,310 20,235 20,85" stroke-width="1"/>
+                <polygon points="150,40 250,100 250,220 150,280 50,220 50,100" stroke-width="0.7"/>
+                <polygon points="150,70 220,115 220,205 150,250 80,205 80,115" stroke-width="0.5"/>
+                <line x1="150" y1="10" x2="150" y2="310" stroke-width="0.3"/>
+                <line x1="20" y1="85" x2="280" y2="235" stroke-width="0.3"/>
+                <line x1="280" y1="85" x2="20" y2="235" stroke-width="0.3"/>
+                <circle cx="150" cy="160" r="60" stroke-width="0.5"/>
+                <circle cx="150" cy="160" r="40" stroke-width="0.3"/>
+                <circle cx="150" cy="160" r="20" stroke-width="0.3"/>
+              </g>
+              <text x="150" y="150" text-anchor="middle" font-family="serif" font-size="28" fill="#c9a84c" opacity="0.9">⚖️</text>
+              <text x="150" y="185" text-anchor="middle" font-family="serif" font-size="16" fill="#e8c97a" opacity="0.7" font-style="italic">The Invisible Balance</text>
+              <text x="150" y="340" text-anchor="middle" font-family="serif" font-size="11" fill="#c9a84c" opacity="0.5">Build Dunya. But with Deen.</text>
+            </svg>
+          </div>
+          <div class="about-img-overlay"></div>
+          <div class="about-img-quote">
+            <p>"Jo hamare liye mujaahada kare — hum unhe raahen dikhate hain."</p>
+            <span>Al-Ankabut: 69 · The Invisible Balance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ISLAMIC BANNER -->
+<div class="islamic-banner">
+  <div class="ib-inner">
+    <div class="ib-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <p class="ib-trans">"In the Name of Allah, the Most Gracious, the Most Merciful."</p>
+    <p class="ib-ref">Every journey begins with Bismillah · ⚖️ TIB</p>
+  </div>
+</div>
+<hr class="divider">
+
+<!-- PRAYER TIMES -->
+<section id="prayer-times">
+  <div class="wrap">
+    <div class="prayer-header">
+      <div><div class="sec-eye">Salah Times</div><h2 class="sec-h2">Aaj Ki <em>Namaz</em></h2><p class="sec-sub" style="margin-bottom:0">Apna shehar select karo.</p></div>
+      <div class="city-selector"><label>City</label>
+        <select class="city-select" id="citySelect" onchange="loadPrayerTimes()">
+          <option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Peshawar</option><option>Quetta</option><option>Multan</option><option>Faisalabad</option><option>Rawalpindi</option><option>Dubai</option><option>London</option><option>New York</option><option>Toronto</option>
+        </select>
+      </div>
+    </div>
+    <div class="prayer-grid" id="prayerGrid">
+      <div class="prayer-card"><div class="prayer-name">Fajr</div><div class="prayer-arabic">الفجر</div><div class="prayer-time" id="pt-fajr">--:--</div></div>
+      <div class="prayer-card"><div class="prayer-name">Sunrise</div><div class="prayer-arabic">الشروق</div><div class="prayer-time" id="pt-sunrise">--:--</div></div>
+      <div class="prayer-card"><div class="prayer-name">Dhuhr</div><div class="prayer-arabic">الظهر</div><div class="prayer-time" id="pt-dhuhr">--:--</div></div>
+      <div class="prayer-card"><div class="prayer-name">Asr</div><div class="prayer-arabic">العصر</div><div class="prayer-time" id="pt-asr">--:--</div></div>
+      <div class="prayer-card"><div class="prayer-name">Maghrib</div><div class="prayer-arabic">المغرب</div><div class="prayer-time" id="pt-maghrib">--:--</div></div>
+      <div class="prayer-card"><div class="prayer-name">Isha</div><div class="prayer-arabic">العشاء</div><div class="prayer-time" id="pt-isha">--:--</div></div>
+    </div>
+    <div class="prayer-countdown"><div class="countdown-inner"><div class="countdown-label">Next Prayer in</div><div class="countdown-time" id="countdown">--:--:--</div><div class="countdown-sub" id="nextPrayerName">Loading...</div></div></div>
+  </div>
+</section>
+<hr class="divider">
+
+<!-- TRACKER -->
+<section id="tracker">
+  <div class="wrap">
+    <div class="sec-eye">Salah Tracker</div>
+    <h2 class="sec-h2">Weekly <em>Salah</em> Tracker</h2>
+    <p class="sec-sub">Har din ki panchon namazein track karo. Accountability = consistency.</p>
+    <div class="tracker-week" id="trackerWeek"></div>
+    <div class="tracker-stats">
+      <div class="ts-card"><div class="ts-n" id="stat-total">0</div><div class="ts-l">This Week</div></div>
+      <div class="ts-card"><div class="ts-n" id="stat-percent">0%</div><div class="ts-l">Completion</div></div>
+      <div class="ts-card"><div class="ts-n" id="stat-today">0/5</div><div class="ts-l">Today</div></div>
+      <div class="ts-card"><div class="ts-n" id="stat-streak">0</div><div class="ts-l">Day Streak</div></div>
+    </div>
+    <div class="tracker-streak">
+      <div><div class="streak-text">Current Streak</div><div class="streak-n" id="streakDisplay">0 days</div></div>
+      <div style="text-align:right"><div class="streak-text" style="margin-bottom:4px">"Allah dekhta hai jo koi nahi dekha." ⚖️</div></div>
+    </div>
+  </div>
+</section>
+<hr class="divider">
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="wrap">
+    <div class="sec-eye">Articles</div>
+    <h2 class="sec-h2">Deen + Dunya <em>Insights</em></h2>
+    <p class="sec-sub">No fluff. Real Islamic perspective on real modern struggles.</p>
+    <div class="articles-featured">
+      <div class="article-card" onclick="openArticle('a1')">
+        <div class="article-card-img art-discipline"><div class="art-inner"><div class="art-arabic">الانضباط</div><div class="art-label">Discipline</div></div></div>
+        <span class="article-tag">Featured · Discipline</span>
+        <h3>Tawakkul Ka Matlab Laziness Nahi — The Islamic Action Framework</h3>
+        <p>Har baar sunne mein aata hai: "Allah pe bharosa rakho." Lekin koi nahi batata ke is bharose ke saath kya karna hai.</p>
+        <div class="article-meta"><span>10 min read</span><span>·</span><span>Discipline</span></div>
+        <span class="read-more">Read Article</span>
+      </div>
+      <div class="article-card" onclick="openArticle('a2')">
+        <div class="article-card-img art-wealth"><div class="art-inner"><div class="art-arabic">الرزق الحلال</div><div class="art-label">Halal Wealth</div></div></div>
+        <span class="article-tag">Wealth · Islamic Finance</span>
+        <h3>Halal Wealth Building — What Islam Actually Says About Money</h3>
+        <p>Muslims ko paise se dar lagta hai. Lekin Quran mein Allah ne apna fadhel maangne ka hukm diya.</p>
+        <div class="article-meta"><span>8 min read</span><span>·</span><span>Wealth</span></div>
+        <span class="read-more">Read Article</span>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <div class="article-card" onclick="openArticle('a3')">
+        <div class="article-card-img art-balance"><div class="art-inner"><div class="art-arabic">التوازن</div><div class="art-label">Balance</div></div></div>
+        <span class="article-tag">Balance</span>
+        <h3>The Niyyah Reset — How to Make Everything Ibaadat</h3>
+        <p>Ek simple shift jo teri entire life ko ibaadat mein badal sakti hai.</p>
+        <div class="article-meta"><span>6 min read</span><span>·</span><span>Balance</span></div>
+        <span class="read-more">Read Article</span>
+      </div>
+      <div class="article-card" onclick="openArticle('a4')">
+        <div class="article-card-img art-fajr"><div class="art-inner"><div class="art-arabic">الفجر</div><div class="art-label">Fajr</div></div></div>
+        <span class="article-tag">Discipline</span>
+        <h3>Fajr Discipline — Why Your Morning Determines Everything</h3>
+        <p>Fajr ke baad ka waqt sone se zyaada barkat wala hai.</p>
+        <div class="article-meta"><span>7 min read</span><span>·</span><span>Discipline</span></div>
+        <span class="read-more">Read Article</span>
+      </div>
+      <div class="article-card" onclick="openArticle('a5')">
+        <div class="article-card-img art-nafs"><div class="art-inner"><div class="art-arabic">النفس</div><div class="art-label">Nafs</div></div></div>
+        <span class="article-tag">Nafs</span>
+        <h3>Your Nafs Is Not Your Enemy — It's Your Test</h3>
+        <p>Islam ne nafs ko kabhi dushman nahi kaha. Ise tarbiyat do.</p>
+        <div class="article-meta"><span>9 min read</span><span>·</span><span>Psychology</span></div>
+        <span class="read-more">Read Article</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-sec">
+  <blockquote>"Jo hamare liye mujaahada kare — <strong>hum unhe raahen dikhate hain.</strong>"</blockquote>
+  <cite>Surah Al-Ankabut · 69</cite>
+</div>
+<hr class="divider">
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="sec-eye">Community</div>
+    <h2 class="sec-h2">TIB <em>Community</em></h2>
+    <p class="sec-sub">Real log. Real change. Ye sirf words nahi — ye results hain.</p>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"TIB ne meri soch badal di. Pehle sochta tha paisa kamana aur deen dono impossible hain. Ab samajh aaya — ye dono ek saath hain. JazakAllah bhai."</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Ahmed K.</div><div class="testi-handle">@theinvisiblebalance follower</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Fajr discipline wali post ne meri zindagi badal di. 3 hafte se Fajr nahi chhoori. Jo 5 saal se nahi hua tha — TIB ne kar diya."</p>
+        <div class="testi-author"><div class="testi-avatar">U</div><div><div class="testi-name">Usman R.</div><div class="testi-handle">@theinvisiblebalance follower</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"TIB Sensei AI se pehli baar Islamic business guidance mili — bilkul seedha, no confusion. Is page pe trust hai mujhe."</p>
+        <div class="testi-author"><div class="testi-avatar">F</div><div><div class="testi-name">Fatima M.</div><div class="testi-handle">TIB Sensei user</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="divider">
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="wrap">
+    <div class="sec-eye">Digital Products</div>
+    <h2 class="sec-h2">TIB <em>Resources</em></h2>
+    <p class="sec-sub">Practical Islamic tools for real world Muslims.</p>
+    <div class="payment-box">
+      <div class="pay-icon">💳</div>
+      <div><div class="pay-label">How to Order</div><div class="pay-info"><strong>Easypaisa:</strong> 0344-97-86-923 (Musawir)<br>Button tap karo → WhatsApp khulega → Payment karo → Screenshot bhejo → PDF milega ⚖️</div></div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card featured">
+        <div class="product-preview product-preview-journal">
+          <span class="product-badge badge-bestseller">Bestseller</span>
+          <div class="pdf-cover"><div class="pdf-cover-text">TIB<br>DISCIPLINE<br>JOURNAL<br>⚖️</div></div>
+          <div class="pdf-pages"><div class="pdf-page"></div><div class="pdf-page"></div><div class="pdf-page"></div></div>
+        </div>
+        <div class="product-body">
+          <h3>TIB Discipline Journal</h3>
+          <p class="product-desc">30-day guided journal combining Islamic reflection with practical goal-setting. Quran reflection, nafs audit, aur gratitude — har din.</p>
+          <div class="product-includes"><h4>Includes</h4><ul><li>30 daily journal pages</li><li>Weekly nafs audit framework</li><li>Halal income planning pages</li><li>Dua & goals section</li><li>Printable PDF format</li></ul></div>
+          <div class="product-price"><span class="price-curr">PKR</span><span class="price-main">999</span></div>
+          <button class="btn-product btn-buy" onclick="productClick('TIB Discipline Journal',999)">Get Journal ⚖️</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-preview product-preview-journal">
+          <span class="product-badge badge-new">New</span>
+          <div class="pdf-cover" style="background:linear-gradient(135deg,#0a1a08,#050f00);border-color:#90d890"><div class="pdf-cover-text" style="color:#90d890">HALAL<br>HUSTLE<br>KIT<br>💼</div></div>
+          <div class="pdf-pages"><div class="pdf-page"></div><div class="pdf-page"></div><div class="pdf-page"></div><div class="pdf-page"></div></div>
+        </div>
+        <div class="product-body">
+          <h3>Halal Hustle Starter Kit</h3>
+          <p class="product-desc">5 halal income streams with Islamic business principles. Zero to first halal income — the TIB way.</p>
+          <div class="product-includes"><h4>Includes</h4><ul><li>5 income stream breakdowns</li><li>Islamic business ethics guide</li><li>Rizq mindset framework</li><li>30-day action plan</li><li>Halal contract templates</li></ul></div>
+          <div class="product-price"><span class="price-curr">PKR</span><span class="price-main">1499</span></div>
+          <button class="btn-product btn-buy" onclick="productClick('Halal Hustle Starter Kit',1499)">Get Kit ⚖️</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-preview product-preview-ai">
+          <span class="product-badge badge-free">Free</span>
+          <div class="ai-orb">🤖</div>
+          <div class="ai-lines"><div class="ai-line"></div><div class="ai-line"></div><div class="ai-line"></div></div>
+          <div style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(201,168,76,.5);letter-spacing:2px;text-transform:uppercase;margin-top:8px">24/7 Available</div>
+        </div>
+        <div class="product-body">
+          <h3>TIB Sensei AI</h3>
+          <p class="product-desc">Your personal Islamic life coach. Ask anything about Deen, discipline, business, or balance — 24/7.</p>
+          <div class="product-includes"><h4>Features</h4><ul><li>Islamic Q&A — any topic</li><li>Halal business guidance</li><li>Daily discipline planning</li><li>Quran & Hadith references</li><li>Muslim mindset coaching</li></ul></div>
+          <div class="product-price"><span class="price-free">Free</span></div>
+          <a href="https://beacons.ai/theinvisiblebalance" target="_blank" class="btn-product btn-get">Access TIB Sensei ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-logo">⚖️ <span>The Invisible Balance</span></div><p>Build Dunya. But with Deen. No sugarcoating. No excuses.</p><div style="margin-top:14px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px">@TheInvisibleBalance</div></div>
+      <div class="footer-col"><h4>Navigate</h4><a href="#about">About TIB</a><a href="#prayer-times">Salah Times</a><a href="#tracker">Salah Tracker</a><a href="#articles">Articles</a><a href="#testimonials">Community</a><a href="#products">Products</a></div>
+      <div class="footer-col"><h4>Articles</h4><a href="#" onclick="openArticle('a1');return false">Tawakkul Framework</a><a href="#" onclick="openArticle('a2');return false">Halal Wealth</a><a href="#" onclick="openArticle('a3');return false">Niyyah Reset</a><a href="#" onclick="openArticle('a4');return false">Fajr Discipline</a><a href="#" onclick="openArticle('a5');return false">Nafs Tarbiyat</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="#">Discipline Journal — PKR 999</a><a href="#">Halal Hustle Kit — PKR 1499</a><a href="https://beacons.ai/theinvisiblebalance" target="_blank">TIB Sensei AI — Free</a><a href="https://wa.me/923239814780" target="_blank">WhatsApp: 0323-98-14-780</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 The Invisible Balance · Build Dunya. But with Deen.</p><p>⚖️ TIB · All Rights Reserved</p></div>
+  </div>
+</footer>
+
+<!-- ARTICLE MODAL -->
+<div class="article-modal" id="articleModal">
+  <div class="article-modal-inner">
+    <button class="modal-back" onclick="closeArticle()">Back to Articles</button>
+    <div id="articleContent"></div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+let prayerData=null,countdownInterval=null;
+async function loadPrayerTimes(){
+  const city=document.getElementById('citySelect').value;
+  const cm={Dubai:'UAE',London:'UK','New York':'US',Toronto:'Canada'};
+  const country=cm[city]||'Pakistan';
+  const d=new Date();
+  const dd=String(d.getDate()).padStart(2,'0'),mm=String(d.getMonth()+1).padStart(2,'0'),yyyy=d.getFullYear();
+  try{
+    document.getElementById('nextPrayerName').textContent='Loading...';
+    const res=await fetch(`https://api.aladhan.com/v1/timingsByCity/${dd}-${mm}-${yyyy}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=1`);
+    const data=await res.json();
+    if(data.code===200){
+      const t=data.data.timings;
+      document.getElementById('pt-fajr').textContent=fmt(t.Fajr);document.getElementById('pt-sunrise').textContent=fmt(t.Sunrise);
+      document.getElementById('pt-dhuhr').textContent=fmt(t.Dhuhr);document.getElementById('pt-asr').textContent=fmt(t.Asr);
+      document.getElementById('pt-maghrib').textContent=fmt(t.Maghrib);document.getElementById('pt-isha').textContent=fmt(t.Isha);
+      prayerData={Fajr:t.Fajr,Sunrise:t.Sunrise,Dhuhr:t.Dhuhr,Asr:t.Asr,Maghrib:t.Maghrib,Isha:t.Isha};
+      hlPrayer();if(countdownInterval)clearInterval(countdownInterval);countdownInterval=setInterval(()=>{cdwn();hlPrayer();},1000);
+    }
+  }catch(e){fallback();}
+}
+function fallback(){const f={Fajr:'05:00',Sunrise:'06:20',Dhuhr:'12:15',Asr:'15:45',Maghrib:'18:30',Isha:'19:50'};['fajr','sunrise','dhuhr','asr','maghrib','isha'].forEach((k,i)=>{document.getElementById('pt-'+k).textContent=fmt(Object.values(f)[i]);});prayerData=f;if(countdownInterval)clearInterval(countdownInterval);countdownInterval=setInterval(()=>{cdwn();hlPrayer();},1000);}
+function fmt(t){const[h,m]=t.split(':');const hr=parseInt(h);return`${hr%12||12}:${m} ${hr>=12?'PM':'AM'}`;}
+function r24(t){const[h,m]=t.split(':');return parseInt(h)*60+parseInt(m);}
+function hlPrayer(){
+  if(!prayerData)return;const now=new Date();const cur=now.getHours()*60+now.getMinutes();
+  const prayers=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+  const cards=document.querySelectorAll('.prayer-card');const times=prayers.map(p=>r24(prayerData[p]));
+  let ci=-1;for(let i=0;i<times.length-1;i++){if(cur>=times[i]&&cur<times[i+1]){ci=i;break;}}if(cur>=times[times.length-1])ci=times.length-1;
+  const ni=(ci+1)%prayers.length;
+  cards.forEach((c,i)=>{c.classList.remove('active','next');const b=c.querySelector('.prayer-badge');if(b)b.remove();if(i===ci){c.classList.add('active');const b=document.createElement('div');b.className='prayer-badge badge-now';b.textContent='Now';c.appendChild(b);}if(i===ni){c.classList.add('next');const b=document.createElement('div');b.className='prayer-badge badge-next';b.textContent='Next';c.appendChild(b);}});
+}
+function cdwn(){
+  if(!prayerData)return;const now=new Date();const cur=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+  const prayers=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];const times=prayers.map(p=>r24(prayerData[p]));
+  let nm=-1,nn='';for(let i=0;i<times.length;i++){if(cur*60<times[i]*60){nm=times[i];nn=prayers[i];break;}}if(nm===-1){nm=times[0]+24*60;nn='Fajr (Tomorrow)';}
+  const ds=Math.round((nm-(now.getHours()*60+now.getMinutes()+now.getSeconds()/60))*60);if(ds<=0)return;
+  const h=Math.floor(ds/3600),m=Math.floor((ds%3600)/60),s=ds%60;
+  document.getElementById('countdown').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.getElementById('nextPrayerName').textContent=`Next: ${nn}`;
+}
+const PRAYERS=['Fajr','Dhuhr','Asr','Maghrib','Isha'],DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function getWeekDates(){const t=new Date(),day=t.getDay(),dates=[];for(let i=0;i<7;i++){const d=new Date(t);d.setDate(t.getDate()-day+i);dates.push(d);}return dates;}
+function dk(d){return`${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;}
+function getTD(){try{return JSON.parse(localStorage.getItem('tib_tracker')||'{}');}catch{return{};}}
+function saveTD(data){try{localStorage.setItem('tib_tracker',JSON.stringify(data));}catch{}}
+function buildTracker(){
+  const dates=getWeekDates(),data=getTD(),today=new Date(),tk=dk(today);
+  const c=document.getElementById('trackerWeek');c.innerHTML='';
+  dates.forEach(d=>{
+    const key=dk(d),isToday=key===tk;
+    const col=document.createElement('div');col.className='day-col';
+    const hdr=document.createElement('div');hdr.className='day-header'+(isToday?' day-today':'');
+    hdr.innerHTML=`<span class="day-name">${DAYS[d.getDay()]}</span><span class="day-date">${d.getDate()}</span>`;col.appendChild(hdr);
+    const cd=document.createElement('div');cd.className='prayer-checks';
+    PRAYERS.forEach(p=>{
+      const done=data[key]&&data[key][p];const row=document.createElement('div');row.className='prayer-check'+(done?' done':'');
+      row.innerHTML=`<span class="check-label">${p.substring(0,3)}</span><div class="check-box"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#060608" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+      if(isToday){row.onclick=()=>toggleP(key,p,row);}cd.appendChild(row);
+    });col.appendChild(cd);c.appendChild(col);
+  });updateStats();
+}
+function toggleP(key,prayer,el){const data=getTD();if(!data[key])data[key]={};data[key][prayer]=!data[key][prayer];if(!data[key][prayer])delete data[key][prayer];saveTD(data);el.classList.toggle('done');updateStats();}
+function updateStats(){
+  const dates=getWeekDates(),data=getTD(),today=new Date(),tk=dk(today);let total=0,tc=0;
+  dates.forEach(d=>{const key=dk(d);if(data[key])total+=Object.values(data[key]).filter(Boolean).length;});
+  if(data[tk])tc=Object.values(data[tk]).filter(Boolean).length;
+  document.getElementById('stat-total').textContent=total;document.getElementById('stat-percent').textContent=Math.round((total/35)*100)+'%';
+  document.getElementById('stat-today').textContent=tc+'/5';let streak=0;const check=new Date();
+  for(let i=0;i<90;i++){const key=dk(check);const d=data[key];if(d&&Object.values(d).filter(Boolean).length===5)streak++;else if(i>0)break;check.setDate(check.getDate()-1);}
+  document.getElementById('stat-streak').textContent=streak;document.getElementById('streakDisplay').textContent=streak+' day'+(streak!==1?'s':'');
+}
+const articles={
+  a1:{tag:'Discipline · Islamic Psychology',title:'Tawakkul Ka Matlab Laziness Nahi',meta:'10 min read · TIB · 2025',body:`<p>Ye conversation har jagah hoti hai. Koi mushkil bata raha hota hai — aur koi kehta hai: <strong>"Bhai, Allah pe bharosa rakho."</strong></p><p>Advice galat nahi. Lekin incomplete hai. Aur incomplete advice dangerous hoti hai.</p><blockquote>"Tawakkul — real tawakkul — do cheezein maangta hai: poori koshish aur phir chhor dena."</blockquote><h2>Hadith Jo Sab Ignore Karte Hain</h2><p>Ek shakhs Nabi ﷺ ke paas aaya. Usne apna oont chhod diya tha — khula. Nabi ﷺ ne farmaya:</p><div class="arabic">اعقلها وتوكل</div><p class="translation">"Pehle baandh — phir tawakkul kar." (Tirmizi)</p><h2>3 Levels of Tawakkul</h2><ul><li><strong>Level 1 — Effort:</strong> Jo kuch bhi kar sakta hai — kar. Ye teri zimmedari hai.</li><li><strong>Level 2 — Dua:</strong> Koshish karte waqt Allah se connect rehna.</li><li><strong>Level 3 — Trust:</strong> 100% de diya — nateeja chhor do.</li></ul><p>Oont baandh. Phir tawakkul kar. ⚖️</p>`},
+  a2:{tag:'Wealth · Islamic Finance',title:'Halal Wealth Building — What Islam Actually Says About Money',meta:'8 min read · TIB · 2025',body:`<p>Muslim households mein paison ki baat hona taboo hai. Ye mindset <strong>Islam ke khilaf hai.</strong></p><div class="arabic">وَلَا تَنسَ نَصِيبَكَ مِنَ الدُّنْيَا</div><p class="translation">"Dunya ka hissa mat bhool." — Al-Qasas: 77</p><h2>Islamic Wealth Framework</h2><ul><li><strong>Halal Source:</strong> Paisa kahan se aata hai — ye sab se important hai.</li><li><strong>Niyyat:</strong> Family ki hifazat, sadaqah — ye highest level hai.</li><li><strong>Zakat:</strong> Lena aur dena dono — Islamic system.</li></ul><blockquote>"Hazrat Khadijah RA businesswoman thin. Wealth Islamic heritage hai."</blockquote><p>Paisa bura nahi — tool hai. Halal use karo. ⚖️</p>`},
+  a3:{tag:'Balance · Spirituality',title:'The Niyyah Reset — How to Make Everything Ibaadat',meta:'6 min read · TIB · 2025',body:`<p>Islam mein ek concept hai jo life-changing hai. Uska naam hai <strong>Niyyah.</strong></p><p>Nabi ﷺ: "Innamal a'maalu binniyyaat." (Bukhari)</p><h2>The Niyyah Shift</h2><p>Ek second ke liye ruk. Apne dil mein ye kaho: <strong>"Ye Allah ke liye hai."</strong></p><blockquote>"Kaam wahi rahega. Reward — ek niyyat se — infinity pe jaata hai."</blockquote><h2>3 Times a Day</h2><ul><li><strong>Subah:</strong> "Ya Allah, aaj ka din tere liye hai."</li><li><strong>Dopehar:</strong> "Mein ye kaam tere liye kar raha hoon."</li><li><strong>Raat:</strong> Review. Kal fresh start.</li></ul><p>Isliye ye Invisible Balance hai — niyyat mein hota hai. ⚖️</p>`},
+  a4:{tag:'Discipline · Morning',title:'Fajr Discipline — Why Your Morning Determines Everything',meta:'7 min read · TIB · 2025',body:`<div class="arabic">اللَّهُمَّ بَارِكْ لِأُمَّتِي فِي بُكُورِهَا</div><p class="translation">"Ya Allah, meri ummat ke liye subah mein barkat." — Nabi ﷺ</p><h2>90 Minutes Golden Window</h2><ul><li><strong>0-15 min:</strong> Quran — 1 page.</li><li><strong>15-30 min:</strong> Dhikr ya dua.</li><li><strong>30-60 min:</strong> Most important task.</li><li><strong>60-90 min:</strong> Body — walk, exercise.</li></ul><blockquote>"Jo subah jeeta hai — woh din jeeta hai."</blockquote><h2>The Phone Rule</h2><p>Fajr ke baad pehla ghanta — <strong>phone nahi.</strong> Try karo 7 din. Sirf 7. ⚖️</p>`},
+  a5:{tag:'Psychology · Nafs',title:"Your Nafs Is Not Your Enemy — It's Your Test",meta:'9 min read · TIB · 2025',body:`<p>Islam mein nafs ke baare mein ek misconception hai. Nafs = khatam karo. <strong>Ye galat hai.</strong></p><h2>3 Types of Nafs</h2><ul><li><strong>Nafs Ammaara:</strong> Burai ki taraf (Yusuf: 53)</li><li><strong>Nafs Lawwaama:</strong> Conscientious (Al-Qiyamah: 2)</li><li><strong>Nafs Mutma'inna:</strong> Peaceful soul (Al-Fajr: 27)</li></ul><blockquote>"Goal: Nafs Ammaara se Nafs Mutma'inna tak le jaana. Journey — war nahi."</blockquote><h2>3 Steps</h2><ul><li><strong>Patterns pehchano</strong> — kab nafs act karta hai?</li><li><strong>Replace, Don't Suppress</strong> — alternative do.</li><li><strong>Small Wins Daily</strong> — har din ek battle jeeto.</li></ul><p>Teri nafs teri test hai — opportunity hai. ⚖️</p>`}
+};
+function openArticle(id){const a=articles[id];if(!a)return;document.getElementById('articleContent').innerHTML=`<div class="modal-tag">${a.tag}</div><h1 class="modal-title">${a.title}</h1><div class="modal-meta">${a.meta}</div><div class="modal-body">${a.body}</div>`;const m=document.getElementById('articleModal');m.classList.add('open');m.scrollTop=0;document.body.style.overflow='hidden';}
+function closeArticle(){document.getElementById('articleModal').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeArticle();});
+function productClick(name,price){const w='923239814780';const msg=encodeURIComponent(`Assalamu Alaikum! Mujhe "${name}" lena hai (PKR ${price}).\n\nEasypaisa: 0344-97-86-923 (Musawir) pe payment kar ke screenshot bhejo. ⚖️ The Invisible Balance`);window.open(`https://wa.me/${w}?text=${msg}`,'_blank');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none';},3000);}
+document.addEventListener('DOMContentLoaded',()=>{buildTracker();loadPrayerTimes();});
+</script>
+</body>
+</html>
